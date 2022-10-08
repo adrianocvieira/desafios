@@ -55,8 +55,7 @@ void EfetuaQuestoes() {
         multiplicador = GeraNumeroEntre1e10();
 
         ImprimeCabecalho(nivel);
-        continuar = EfetuaQuestao(multiplicando,
-            multiplicador);
+        continuar = EfetuaQuestao();
         if (continuar)
             AtualizaPontos(nivel);
     } while (continuar);
