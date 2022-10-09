@@ -28,7 +28,7 @@ int GeraNumeroEntre1e10() {
     return (rand() % 10) + 1;
 }
 
-bool EfetuaQuestao(int multiplicando, int multiplicador) {
+bool EfetuaQuestao() {
     int resposta;
     cout << "\t";
     cout << multiplicando << "x" << multiplicador << " = ";
