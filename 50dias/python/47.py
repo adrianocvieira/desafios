@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 prodStringSize = 20
 codigos = [100, 101, 102, 103, 104, 105]
@@ -35,7 +36,7 @@ def ImprimeCardapio():
 def ImprimePedido(pedidoAtual):
     precoTotal = 0.00
     print('==========================================')
-    print('               Seu pedido                 ')
+    print('                 Pedido                 ')
     print('==========================================')
     print('  Produto             |  Quant   |  Preco ')
     print('------------------------------------------')
@@ -103,7 +104,10 @@ def LePedidoDoUsuario():
             if ValidaInformacoes(opcao, quantidade):
                 RegistraPedido(pedidoAtual, opcao, quantidade)
 
+    agora = datetime.now()
+    data = agora.strftime("%d/%m/%Y %H:%M:%S")
     pedidosTotais[codigoPedido] = {'nome': nomeUsuario,
+                                   'data': data,
                                    'pedido': pedidoAtual}
                                    
     print('\n  O seu pedido é o número: {}'.format(codigoPedido))
@@ -124,10 +128,10 @@ def ImprimeMenuSistema():
     return opcao
 
 def ImprimePedidosDoDia():
-    print(pedidosTotais)
     for codigoPedido, pedidoUsuario in pedidosTotais.items():
         print(' Pedido n: {}'.format(codigoPedido))
         print(' Cliente: {}'.format(pedidoUsuario['nome']))
+        print(' Data: {}'.format(pedidoUsuario['data']))
         ImprimePedido(pedidoUsuario['pedido'])
 
 def main():
