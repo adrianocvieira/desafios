@@ -19,6 +19,7 @@ produtos = {codigos[0]: {'nome': 'Cachorro Quente',
 pedidosTotais = {}
 codigoPedido = 0
 
+
 def ImprimeCardapio():
     print('------------------------------------------')
     print('  Produto             |  Codigo  |  Preco ')
@@ -32,6 +33,7 @@ def ImprimeCardapio():
                                                               preco=preco)
         print(msg)
     print('------------------------------------------')
+
 
 def ImprimePedido(pedidoAtual):
     precoTotal = 0.00
@@ -56,12 +58,15 @@ def ImprimePedido(pedidoAtual):
     print('  Preco Total: R$ {preco:.2f}'.format(preco=precoTotal))
     print('------------------------------------------')
 
+
 def ImprimeMenuPedidos(pedidoAtual):
     ImprimeCardapio()
     ImprimePedido(pedidoAtual)
 
+
 def RegistraPedido(pedidoAtual, codigo, quantidade):
     pedidoAtual[codigo] += quantidade
+
 
 def LeOpcoesDoUsuario():
     opcao = int(input('Digite o codigo do produto (0 para sair): '))
@@ -69,6 +74,7 @@ def LeOpcoesDoUsuario():
     if opcao != 0:
         quantidade = int(input('Digite a quantidade: '))
     return opcao, quantidade
+
 
 def ValidaInformacoes(opcao, quantidade):
     produtoExiste = opcao in codigos
@@ -80,6 +86,7 @@ def ValidaInformacoes(opcao, quantidade):
 
     return produtoExiste and quantidadeValida
 
+
 def CriaPedido():
     pedido = {codigos[0]: 0,
               codigos[1]: 0,
@@ -88,6 +95,7 @@ def CriaPedido():
               codigos[4]: 0,
               codigos[5]: 0}
     return pedido
+
 
 def LePedidoDoUsuario():
     global codigoPedido
@@ -109,11 +117,12 @@ def LePedidoDoUsuario():
     pedidosTotais[codigoPedido] = {'nome': nomeUsuario,
                                    'data': data,
                                    'pedido': pedidoAtual}
-                                   
+
     print('\n  O seu pedido é o número: {}'.format(codigoPedido))
     print('  Efetue o pagamento no caixa.')
     print('  Muito obrigado pelo seu pedido!')
     _ = input('\nTecle ENTER para sair!')
+
 
 def ImprimeMenuSistema():
     print('==========================================')
@@ -127,6 +136,7 @@ def ImprimeMenuSistema():
         opcao = int(input('Digite a opcao: '))
     return opcao
 
+
 def ImprimePedidosDoDia():
     for codigoPedido, pedidoUsuario in pedidosTotais.items():
         print(' Pedido n: {}'.format(codigoPedido))
@@ -134,13 +144,16 @@ def ImprimePedidosDoDia():
         print(' Data: {}'.format(pedidoUsuario['data']))
         ImprimePedido(pedidoUsuario['pedido'])
 
+
 def main():
     opcaoSistema = -1
     while opcaoSistema != 9:
+        os.system('cls')
         opcaoSistema = ImprimeMenuSistema()
         if opcaoSistema != 9:
             LePedidoDoUsuario()
 
     ImprimePedidosDoDia()
+
 
 main()
