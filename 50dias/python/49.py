@@ -198,7 +198,7 @@ def CadastraProduto():
     EscreveArquivoJson('produtos.json', produtos)
 
 def PreencheSistema():
-    global produtos, codigos
+    global produtos
     produtos = LeArquivoJson('produtos.json')
 
 def main():
