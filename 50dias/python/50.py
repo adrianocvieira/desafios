@@ -7,23 +7,28 @@ produtos = {}
 pedidosTotais = {}
 codigoPedido = 0
 
+
 def LeArquivoJson(nomeDoArquivo):
     conteudo = {}
     with open(nomeDoArquivo) as arquivoJson:
         conteudo = json.load(arquivoJson)
     return conteudo
-    
+
+
 def EscreveArquivoJson(nomeDoArquivo, conteudo):
     with open(nomeDoArquivo, 'w') as arquivoJson:
         json.dump(conteudo, arquivoJson, indent=4)
+
 
 def EscreveTextoNoArquivo(texto, nomeDoArquivo):
     output_file = open(nomeDoArquivo, 'a')
     output_file.write(texto)
     output_file.close()
 
+
 def ProdutoExiste(codigoProduto):
     return codigoProduto in produtos.keys()
+
 
 def ImprimeCardapio():
     print('------------------------------------------')
@@ -55,8 +60,8 @@ def GeraTextoPedido(pedidoAtual):
                 nome = produto['nome'].ljust(prodStringSize)
                 preco = produto['preco']
                 msg = '  {nome}|  {quant}     |  R$ {preco:.2f}\n'.format(nome=nome,
-                                                                        quant=quantidade,
-                                                                        preco=quantidade * preco)
+                                                                          quant=quantidade,
+                                                                          preco=quantidade * preco)
                 textoPedido += msg
                 precoTotal += quantidade * preco
 
@@ -65,13 +70,16 @@ def GeraTextoPedido(pedidoAtual):
     textoPedido += '------------------------------------------\n'
     return textoPedido
 
+
 def ImprimePedido(pedidoAtual):
     textoPedido = GeraTextoPedido(pedidoAtual)
     print(textoPedido)
 
+
 def ImprimeMenuPedidos(pedidoAtual):
     ImprimeCardapio()
     ImprimePedido(pedidoAtual)
+
 
 def RegistraPedido(pedidoAtual, codigo, quantidade):
     pedidoAtual[codigo] += quantidade
@@ -128,8 +136,11 @@ def LePedidoDoUsuario():
     print('  Muito obrigado pelo seu pedido!')
     _ = input('\nTecle ENTER para sair!')
 
+
 def OpcaoMenuPrincipalValida(opcao):
-    return opcao == "1" or opcao == "7" or opcao == "8" or opcao == "9"
+    return opcao == "1" or opcao == "7" or \
+           opcao == "8" or opcao == "9"
+
 
 def ImprimeMenuSistema():
     print('==========================================')
@@ -145,6 +156,7 @@ def ImprimeMenuSistema():
         opcao = input('Digite a opcao: ')
     return opcao
 
+
 def GeraTextoPedidosDoDia():
     textoPedidosDia = ""
     for codigoPedido, pedidoUsuario in pedidosTotais.items():
@@ -153,6 +165,7 @@ def GeraTextoPedidosDoDia():
         textoPedidosDia += ' Data: {}\n'.format(pedidoUsuario['data'])
         textoPedidosDia += GeraTextoPedido(pedidoUsuario['pedido'])
     return textoPedidosDia
+
 
 def GeraCabecalhoRelatorio(tituloCabecalho):
     agora = datetime.now()
@@ -164,10 +177,12 @@ def GeraCabecalhoRelatorio(tituloCabecalho):
     textoCabecalho += "==============================================\n"
     return textoCabecalho
 
+
 def ImprimePedidosDoDia():
     textoRelatorioPedidosDoDia = GeraCabecalhoRelatorio("RELATORIO DE PEDIDOS DO DIA")
     textoRelatorioPedidosDoDia += GeraTextoPedidosDoDia()
     EscreveTextoNoArquivo(textoRelatorioPedidosDoDia, 'pedidos.txt')
+
 
 def ImprimeRelatorioVendasDia():
     todosPedidosDoDia = CriaPedido()
@@ -181,10 +196,12 @@ def ImprimeRelatorioVendasDia():
     textoRelatorioVendas += GeraTextoPedido(todosPedidosDoDia)
     EscreveTextoNoArquivo(textoRelatorioVendas, 'relatorio.txt')
 
+
 def ImprimeRelatoriosDoDia():
     ImprimePedidosDoDia()
     ImprimeRelatorioVendasDia()
-    
+
+
 def CadastraProduto():
     produtoExiste = True
     while produtoExiste:
@@ -194,10 +211,11 @@ def CadastraProduto():
             print('Codigo do produto já existente!\n')
     nomeProduto = input('Digite o nome do produto: ')
     preco = float(input('Digite o preco do produto: '))
-    produtos[codigoNovoProduto] = {"nome" : nomeProduto,
+    produtos[codigoNovoProduto] = {"nome": nomeProduto,
                                    "preco": preco}
     AtualizaProdutosNoArquivoJson()
-    
+
+
 def AtualizaProdutosNoArquivoJson():
     EscreveArquivoJson('produtos.json', produtos)
 
@@ -208,7 +226,7 @@ def AtualizaProduto():
         codigoProduto = input('Digite o codigo do produto: ')
         produtoNaoExiste = not ProdutoExiste(codigoProduto)
         if produtoNaoExiste:
-            print('Codigo do produto não existe!\n')
+            print('Codigo do produto nao existe!\n')
     produto = produtos[codigoProduto]
     print('Atualizando {}'.format(produto["nome"]))
     produto["preco"] = float(input('Digite o novo valor: '))
@@ -216,16 +234,17 @@ def AtualizaProduto():
     AtualizaProdutosNoArquivoJson()
 
 def PreencheSistema():
-    global produtos, codigos
+    global produtos
     produtos = LeArquivoJson('produtos.json')
+
 
 def main():
     PreencheSistema()
-    
+
     while True:
         os.system('cls')
         opcaoSistema = ImprimeMenuSistema()
-        
+
         if opcaoSistema == "1":
             LePedidoDoUsuario()
         elif opcaoSistema == "7":
