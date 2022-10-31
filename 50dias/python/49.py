@@ -184,7 +184,7 @@ def ImprimeRelatoriosDoDia():
     ImprimePedidosDoDia()
     ImprimeRelatorioVendasDia()
     
-def CadastraPedido():
+def CadastraProduto():
     produtoExiste = True
     while produtoExiste:
         codigoNovoProduto = input('Digite o codigo do produto: ')
@@ -211,7 +211,7 @@ def main():
         if opcaoSistema == "1":
             LePedidoDoUsuario()
         elif opcaoSistema == "8":
-            CadastraPedido()
+            CadastraProduto()
         else:
             break
 
