@@ -1,0 +1,30 @@
+{
+    "100": {
+        "nome": "Cachorro Quente",
+        "preco": 1.2
+    },
+    "101": {
+        "nome": "Bauru Simples",
+        "preco": 1.3
+    },
+    "102": {
+        "nome": "Bauru com ovo",
+        "preco": 1.5
+    },
+    "103": {
+        "nome": "Hamburguer",
+        "preco": 1.2
+    },
+    "104": {
+        "nome": "Cheeseburguer",
+        "preco": 1.3
+    },
+    "105": {
+        "nome": "Refrigerante",
+        "preco": 1.0
+    },
+    "106": {
+        "nome": "Coxinha",
+        "preco": 7.9
+    }
+}
